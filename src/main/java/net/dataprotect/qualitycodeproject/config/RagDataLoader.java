@@ -21,7 +21,7 @@ import java.util.List;
 
 @Component
 public class RagDataLoader {
-
+whwh
 	@Bean
 	public RestTemplate restTemplate() {
 		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
@@ -45,14 +45,6 @@ public class RagDataLoader {
 			return vectorStore;
 		}
 
-		List<Document> chunks = getDocuments(fileFromUser);
-
-		vectorStore.accept(chunks);
-		vectorStore.save(file);
-		return vectorStore;
-	}
-
-	private static List<Document> getDocuments(Resource fileFromUser) {
 		PagePdfDocumentReader pagePdfDocumentReader = new PagePdfDocumentReader(fileFromUser);
 		List<Document> documents = pagePdfDocumentReader.get();
 
@@ -66,7 +58,10 @@ public class RagDataLoader {
 		if (chunks.isEmpty()) {
 			throw new IllegalArgumentException("Aucun contenu valide n'a pu être extrait après découpage");
 		}
-		return chunks;
+
+		vectorStore.accept(chunks);
+		vectorStore.save(file);
+		return vectorStore;
 	}
 
 	public String generateFileHash(File file) throws Exception {
